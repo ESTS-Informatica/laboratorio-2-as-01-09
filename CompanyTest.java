@@ -15,28 +15,16 @@ public class CompanyTest
 {
     
     private Company company1;
-    private User client1;
     private User client2;
+    private User client3;
+    private User seller1;
+    private User seller2;
     
     /**
      * Construtor default para a classe de teste CompanyTest
      */
     public CompanyTest()
     {
-    }
-
-    /**
-     * Define a 'fixture' do teste.
-     *
-     * Chamado antes de cada método de caso de teste.
-     */
-    @BeforeEach
-    public void setUp(){
-        User client1 = new User("José Manuel","911111111","zemanel@yahoo.com");
-        User client2 = new User("António Francisco","922222222","tochico@hotmail.com");
-        User seller1 = new User("Fernando Fernandes","966777101","fefe@remax.pt");
-        User seller2 = new User("Rodrigo Rodrigues","966777152","roro@remax.pt");
-        company1 = new Company();
     }
     @Test
     public void testContructor(){
@@ -49,8 +37,8 @@ public class CompanyTest
     }
     @Test
     public void testRegisterClientDuplicate(){
-        assertTrue(company1.registerClient(client2));
-        assertFalse(company1.registerClient(client2));
+        assertTrue(company1.registerClient(client3));
+        assertFalse(company1.registerClient(client3));
     }
     @Test
     public void testRegisterClientNull(){
@@ -64,5 +52,18 @@ public class CompanyTest
     @AfterEach
     public void tearDown()
     {
+    }
+    /**
+     * Define a 'fixture' do teste.
+     *
+     * Chamado antes de cada método de caso de teste.
+     */
+    @BeforeEach
+    public void setUp(){
+        this.client2 = new User("José Manuel","911111111","zemanel@yahoo.com");
+        this.client3 = new User("António Francisco","922222222","tochico@hotmail.com");
+        this.seller1 = new User("Fernando Fernandes","966777101","fefe@remax.pt");
+        this.seller2 = new User("Rodrigo Rodrigues","966777152","roro@remax.pt");
+        this.company1 = new Company();
     }
 }

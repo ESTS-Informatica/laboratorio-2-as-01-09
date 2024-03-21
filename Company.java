@@ -79,8 +79,6 @@ public class Company {
                 return true;
             }
             return false;
-            
-        
     }  // dummy implementation
     
 
