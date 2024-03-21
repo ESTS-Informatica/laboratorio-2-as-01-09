@@ -89,7 +89,12 @@ public class Company {
      * @return true If the registration succeeds, false otherwise.
      */
     public boolean registerSeller(User seller) {
-        return true;         // dummy implementation
+        if(!sellers.contains(seller) && seller !=null){
+                sellers.add(seller);
+                return true;
+            }
+            return false;
+        // dummy implementation
     }
 
     /**
@@ -99,7 +104,12 @@ public class Company {
      * @return true If the registration succeeds, false otherwise.
      */
     public boolean registerProperty(Property property) {
-        return true;         // dummy implementation
+        if(!properties.contains(property) && property !=null){
+                properties.add(property);
+                return true;
+            }
+            return false;
+         // dummy implementation
     }
 
     /**
@@ -109,7 +119,11 @@ public class Company {
      * @return true If the registration succeeds, false otherwise.
      */
     public boolean registerSell(Sell sell) {
-        return true;         // dummy implementation
+            if(!sells.contains(sell) && sell != null){
+                sells.add(sell);
+                return true;
+            }
+        return false;         // dummy implementation
     }
 
     /**
@@ -121,7 +135,11 @@ public class Company {
      * @return true If the request succeeds, false otherwise.
      */
     public boolean createSell(User client, User seller, Property property) {
-        return true;         // dummy implementation
+        if(clients.contains(client) && sellers.contains(seller) && properties.contains(property) && client != null && seller !=null & property !=null){
+            registerSell(new Sell(client,seller,property));
+            return true;
+        }
+        return false;     
     }
 
     /**
@@ -131,7 +149,14 @@ public class Company {
      * @return The total number of sells in the year.
      */
     public int calculateSellsOfTheYear(int year) {
-        return 0;         // dummy implementation
+        int count = 0;
+        for(Sell sell : sells){
+            LocalDate sells=sell.getDate();
+            if( sells.getYear() == year){
+                    count++;
+            }
+        }
+        return count;      // dummy implementation
     }
 
     /**
@@ -140,8 +165,25 @@ public class Company {
      * @param year
      * @return The name of the seller of the year.
      */
-    public String findSellerOfTheYear(int year) {
-        return null;         // dummy implementation
-    }
-
+    
+     public String findSellerOfTheYear(int year) {
+        User sellerOfTheYear = null;
+        int maxSales=0; 
+        for(User seller : sellers){
+            int salesCount =0;
+            for(Sell sell : sells){
+                    LocalDate sellDate=sell.getDate();
+                    if(sell.getSeller() == seller && sellDate.getYear() == year){
+                        salesCount ++;
+                    }
+                }
+            if(salesCount > maxSales){
+                    maxSales=salesCount;
+                    sellerOfTheYear=seller;
+                }
+        }
+        return sellerOfTheYear.getName(); 
+        }
 }
+        
+    
